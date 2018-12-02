@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+ar=[]
+with open("numbers.txt") as f:
+    while True:
+        a=f.readline()
+        if not a: break        
+        for i in a.split(','):
+            ar+=[float(i)]    
+    
+arr=np.array(ar)
+print(ar)
+
+density = stats.kde.gaussian_kde(ar)
+x = np.arange(0., 100, .1)
+plt.plot(x, density(x))
+plt.show()
+
+a = np.loadtxt("numbers.txt",delimiter=',')
+print(a)
+
+def rows(x):
+    for i in range(x//2-1,1,-1):
+        if x%i==0:
+            return i
+    return -1
+res=rows(len(ar))
+b=np.array(ar).reshape(res,len(ar)//res)
+print("res: "+str(res))
+print(b)
